@@ -1,9 +1,6 @@
 package my.vb.sportbook.datastore.service;
 
 import my.vb.sportbook.datastore.model.IndexedEntity;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import java.util.Optional;
 
 public interface CRUDMethods<T extends IndexedEntity, D>{
     T create(D dto);
