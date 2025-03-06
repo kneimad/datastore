@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.vb.sportbook.datastore.dto.OutcomeDTO;
 import my.vb.sportbook.datastore.model.Outcome;
+import my.vb.sportbook.datastore.service.MarketService;
 import my.vb.sportbook.datastore.service.OutcomeService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,4 +22,5 @@ public class OutcomeController implements CRUDControllerInterface<OutcomeDTO, Ou
         log.info("getService: OutcomeService");
         return outcomeService;
     }
+
 }

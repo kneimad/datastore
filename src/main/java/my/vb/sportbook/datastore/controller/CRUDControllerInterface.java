@@ -2,24 +2,28 @@ package my.vb.sportbook.datastore.controller;
 
 import my.vb.sportbook.datastore.model.IndexedEntity;
 import my.vb.sportbook.datastore.service.CRUDMethods;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
-public interface CRUDControllerInterface<D, T extends IndexedEntity, E extends CRUDMethods<T, D>>{
+public interface CRUDControllerInterface<D, T extends IndexedEntity, E extends CRUDMethods<D>> {
+
+    Logger logger = LoggerFactory.getLogger(CRUDControllerInterface.class);
 
     @PostMapping("/create")
-    default ResponseEntity<T> create(@RequestBody D dto) {
-        if (!(getService() instanceof CRUDMethods)) {
-            throw new IllegalStateException("Service is not an implementation of CRUDMethods");
-        }
-        return new ResponseEntity<>(getService().create(dto), OK);
+    default ResponseEntity<D> create(@RequestBody D dto) {
+        D createdEntity = getService().create(dto);
+        return new ResponseEntity<>(createdEntity, OK);
     }
 
     @PutMapping("/update")
-    default ResponseEntity<T> update(@RequestBody D dto) {
-        return new ResponseEntity<>(getService().update(dto), OK);
+    default ResponseEntity<D> update(@RequestBody D dto) {
+        D updatedEntity = getService().update(dto);
+        return new ResponseEntity<>(updatedEntity, OK);
     }
 
     @DeleteMapping("/{id}")
@@ -28,9 +32,16 @@ public interface CRUDControllerInterface<D, T extends IndexedEntity, E extends C
     }
 
     @GetMapping("/find/{id}")
-    default ResponseEntity<T> findById(@PathVariable(name = "id")  Long id) {
-        return new ResponseEntity<>(getService().findById(id), OK);
+    default ResponseEntity<D> findById(@PathVariable(name = "id") Long id) {
+        logger.info("Fetching entity with ID: {}", id);
+        D entity = getService().findById(id);
+        if (entity == null) {
+            logger.warn("Entity with ID {} not found", id);
+            return new ResponseEntity<>(null, NOT_FOUND);
+        }
+        logger.info("Entity with ID {} found: {}", id, entity);
+        return new ResponseEntity<>(entity, OK);
     }
 
-    E getService();
+    CRUDMethods<D> getService();
 }

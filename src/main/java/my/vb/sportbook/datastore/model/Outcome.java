@@ -14,5 +14,7 @@ public class Outcome extends HistoryData implements IndexedEntity {
     private String description;
     private boolean settled;
     private BigDecimal price;
-    private String result; //mb enum ?
+    private String result;
+
+    private Long marketId;
 }

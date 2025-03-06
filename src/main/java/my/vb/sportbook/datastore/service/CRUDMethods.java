@@ -2,10 +2,10 @@ package my.vb.sportbook.datastore.service;
 
 import my.vb.sportbook.datastore.model.IndexedEntity;
 
-public interface CRUDMethods<T extends IndexedEntity, D>{
-    T create(D dto);
-    T update(D dto);
+public interface CRUDMethods<D>{
+    D create(D dto);
+    D update(D dto);
     void delete(D dto);
     void deleteById(Long id);
-    T findById(Long id);
+    D findById(Long id);
 }
