@@ -26,7 +26,7 @@ public interface CRUDControllerInterface<D, T extends IndexedEntity, E extends C
         return new ResponseEntity<>(updatedEntity, OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     default void deleteById(@PathVariable(name = "id") Long id) {
         getService().deleteById(id);
     }
