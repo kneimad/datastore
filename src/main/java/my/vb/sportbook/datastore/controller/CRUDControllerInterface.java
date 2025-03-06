@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.*;
 
-//public interface CRUDControllerInterface<D, T extends IndexedEntity, E extends CRUDInterface<T, MongoRepository<T, Long>, D>>{
 public interface CRUDControllerInterface<D, T extends IndexedEntity, E extends CRUDMethods<T, D>>{
 
     @PostMapping("/create")
     default ResponseEntity<T> create(@RequestBody D dto) {
+        if (!(getService() instanceof CRUDMethods)) {
+            throw new IllegalStateException("Service is not an implementation of CRUDMethods");
+        }
         return new ResponseEntity<>(getService().create(dto), OK);
     }
-
 
     @PutMapping("/update")
     default ResponseEntity<T> update(@RequestBody D dto) {

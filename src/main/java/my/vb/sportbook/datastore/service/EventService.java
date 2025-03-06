@@ -4,5 +4,5 @@ import my.vb.sportbook.datastore.dto.EventDTO;
 import my.vb.sportbook.datastore.model.Event;
 import my.vb.sportbook.datastore.repository.EventRepository;
 
-public interface EventService extends MongoRepositoryMethods<Event, EventRepository, EventDTO> {
+public abstract class EventService extends MongoRepositoryMethods<Event, EventRepository, EventDTO> {
 }

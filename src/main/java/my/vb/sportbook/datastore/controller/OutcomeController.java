@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/outcome")
 @RequiredArgsConstructor
-//public class OutcomeController implements CRUDControllerInterface<OutcomeDTO, Outcome, CRUDInterface<Outcome, MongoRepository<Outcome, Long>, OutcomeDTO>>{
 public class OutcomeController implements CRUDControllerInterface<OutcomeDTO, Outcome, OutcomeService>{
 
     private final OutcomeService outcomeService;

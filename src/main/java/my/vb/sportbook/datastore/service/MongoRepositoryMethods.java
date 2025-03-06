@@ -1,35 +1,48 @@
 package my.vb.sportbook.datastore.service;
 
+import my.vb.sportbook.datastore.exception.EntityNotFoundException;
 import my.vb.sportbook.datastore.model.IndexedEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface MongoRepositoryMethods<T extends IndexedEntity, E extends MongoRepository<T, Long>, D> extends CRUDMethods<T, D>{
-    default T create(D dto) {
+public abstract class MongoRepositoryMethods<T extends IndexedEntity, E extends MongoRepository<T, Long>, D> implements CRUDMethods<T, D> {
+
+    @Override
+    public T create(D dto) {
         return getRepository().save(convert(dto));
     }
 
-    default T update(D dto) {
+    @Override
+    public T update(D dto) {
         T t = convert(dto);
-        return Optional.of(getRepository().findById(t.getId()))
+        if (t == null || t.getId() == null) {
+            throw new IllegalArgumentException("DTO cannot be converted to an entity or id is null");
+        }
+            return Optional.of(getRepository().findById(t.getId()))
                 .map(v -> getRepository().save(t))
                 .orElse(null);
     }
 
-    default void delete(D dto) {
+    @Override
+    public void delete(D dto) {
         getRepository().delete(convert(dto));
     }
 
-    default void deleteById(Long id) {
+    @Override
+    public void deleteById(Long id) {
         getRepository().deleteById(id);
     }
 
-    default T findById(Long id) {
-        return getRepository().findById(id).orElse(null);
+    @Override
+    public T findById(Long id) {
+        return getRepository().findById(id).orElseThrow(() ->
+                new EntityNotFoundException
+                        ("Entity with id " + id + " not found"));
+
     }
 
-    E getRepository();
+    protected abstract E getRepository();
 
-    T convert(D dto);
+    protected abstract T convert(D dto);
 }

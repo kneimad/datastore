@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OutcomeServiceImpl implements OutcomeService {
+public class OutcomeServiceImpl extends OutcomeService {
 
     private final OutcomeRepository outcomeRepository;
 

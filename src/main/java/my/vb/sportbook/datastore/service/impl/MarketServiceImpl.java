@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MarketServiceImpl implements MarketService {
+public class MarketServiceImpl extends MarketService {
 
     private final MarketRepository marketRepository;
 
