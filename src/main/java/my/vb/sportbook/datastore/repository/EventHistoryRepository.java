@@ -1,10 +1,11 @@
 package my.vb.sportbook.datastore.repository;
 
-import my.vb.sportbook.datastore.model.Outcome;
+import my.vb.sportbook.datastore.model.EventHistory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OutcomeRepository extends MongoRepository<Outcome, Long> {
+public interface EventHistoryRepository extends MongoRepository<EventHistory, Long> {
 
 }
+

@@ -22,7 +22,6 @@ public class OutcomeDTO implements Serializable {
     private boolean settled;
     private BigDecimal price;
     private String result;
-    private Long marketId;
 
     public OutcomeDTO(Outcome outcome) {
         this.id = outcome.getId();
@@ -30,7 +29,6 @@ public class OutcomeDTO implements Serializable {
         this.settled = outcome.isSettled();
         this.price = outcome.getPrice();
         this.result = outcome.getResult();
-        this.marketId = outcome.getMarketId();
     }
 
     public Outcome convertTo(){
@@ -40,7 +38,6 @@ public class OutcomeDTO implements Serializable {
                 .settled(settled)
                 .price(price)
                 .result(result)
-                .marketId(marketId)
                 .build();
     }
 }

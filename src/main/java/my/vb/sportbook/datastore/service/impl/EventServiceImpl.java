@@ -1,6 +1,5 @@
 package my.vb.sportbook.datastore.service.impl;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.vb.sportbook.datastore.dto.EventDTO;
 import my.vb.sportbook.datastore.model.Event;
