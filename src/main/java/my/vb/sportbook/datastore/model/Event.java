@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Data
 @Builder
+@TypeAlias("Event")
 @Document(collection = "events")
 public class Event implements IndexedEntity {
     @Id
