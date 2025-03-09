@@ -1,7 +1,6 @@
 package my.vb.sportbook.datastore.service;
 
 import lombok.RequiredArgsConstructor;
-import my.vb.sportbook.datastore.dto.EventDTO;
 import my.vb.sportbook.datastore.exception.EntityNotFoundException;
 import my.vb.sportbook.datastore.model.IndexedEntity;
 import org.springframework.cache.annotation.CacheEvict;
@@ -9,14 +8,10 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class CRUDProcessor<T extends IndexedEntity, E extends MongoRepository<T, Long>, D> implements CRUDMethods<D> {
-
-    private final CacheService cacheService;
 
     @Override
     @CachePut(value = "entitiesCache", key = "#dto.id")
