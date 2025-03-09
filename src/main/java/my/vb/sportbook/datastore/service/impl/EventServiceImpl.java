@@ -12,6 +12,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * A service implementation class for managing events in the system.
+ * Extends {@code CRUDProcessor} and implements {@code EventService} to provide
+ * CRUD operations and additional functionality specific to events.
+ *
+ * This class interacts with the {@code EventRepository} for database operations
+ * and leverages {@code CacheService} for managing cache entries during event
+ * creation, updates, or deletions.
+ *
+ * Features include:
+ * - Conversion between {@code Event} and {@code EventDTO} objects.
+ * - Eviction of non-settled events from the cache based on specific criteria.
+ * - Overridden CRUD methods with cache eviction logic.
+ */
 @Slf4j
 @Service
 public class EventServiceImpl extends CRUDProcessor<Event, MongoRepository<Event, Long>, EventDTO> implements EventService {
