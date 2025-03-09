@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class HazelcastConfig {
 
     private static final String CACHE_NAME = "entitiesCache";
-    private static final int TTL_SECONDS = 15;
+    private static final int TTL_SECONDS = 600;
 
     @Bean
     public com.hazelcast.core.HazelcastInstance hazelcastInstance() {
